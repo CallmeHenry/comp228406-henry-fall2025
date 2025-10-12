@@ -5,25 +5,6 @@ import java.util.Random;
 
 public class Test {
 
-    //    private String[] questions = {
-//        "1. What is an array?\n",
-//            "2. What is method overloading?\n",
-//            "3. What is scope of declarations?\n",
-//            "4. What is a static method?\n",
-//            "5. What is a module?\n"
-//    };
-//
-//
-//    private String[] choices = {
-//            "1. Methods of the same name can be declared in the same class, as long as they have different sets of parameters.",
-//            "2. A collection of data structures, all of the same type, in which each item's position is uniquely designated by an integer.",
-//            "3. A uniquely named, reusable group of related packages, as well as resources.",
-//            "4. The portion of the program that can refer to the declared entity by its name, such as an entity is said to be in scope for that portion of the program.",
-//            "5. A method that is associated with the class in which it is defined rather than with any object.",
-//    };
-//
-//    private int[] answers = {2, 1, 4, 5, 3};
-//
     private final String[][][] questions = {
             {
                     {"1. What is an array?\n"},
@@ -73,7 +54,7 @@ public class Test {
     };
 
     private final String[] incorrect = {
-            "No. Please try aggain.", "Wrong. Try once more", "Don't give up!", "No. Keep trying..."
+            "No. Please try again.", "Wrong. Try once more", "Don't give up!", "No. Keep trying..."
     };
 
     private final Random rand = new Random();
@@ -83,13 +64,17 @@ public class Test {
     }
 
     private String simulateQuestion(int i) {
-            String question = questions[i][0][0] + questions[i][1];
+            String question = questions[i][0][0] + '\n';
+            for (int j = 0; j < 4; j++) {
+                question += '\t' + questions[i][1][j] + '\n';
+            }
             String input = JOptionPane.showInputDialog(null, question);
             return input;
     }
 
-    private void checkAnswer(String input, int i) {
-        if (input == questions[i][2][0]) {
+    private void checkAnswer(int input, int i) {
+        int answer = Integer.parseInt(questions[i][2][0]);
+        if (input == answer) {
             generateMessage(true);
         }
         else {
@@ -107,7 +92,8 @@ public class Test {
 
     public void inputAnswer() {
         for (int i = 0; i < questions.length; i++) {
-            String input = simulateQuestion(i);
+            String inputString = simulateQuestion(i);
+            int input = Integer.parseInt(inputString);
             checkAnswer(input, i);
         }
     }
