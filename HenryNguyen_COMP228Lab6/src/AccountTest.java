@@ -18,7 +18,7 @@ public class AccountTest {
         executorService.execute(transactions.get(2));
 
         executorService.shutdown();
-        
+
         System.out.println(account.total);
 
     }
